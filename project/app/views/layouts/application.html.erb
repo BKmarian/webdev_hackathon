@@ -9,7 +9,7 @@
 <body>
 
 <% if session[:user_account] %>
-  Signed in as <%= current_user.nume %> ( <%= session[:user_type] == "student" ? Student : Company %> ) <%= link_to "Logout", '/logout' %>
+  Signed in as <%= current_user.name %> ( <%= session[:user_type] == "student" ? Student : Company %> ) <%= link_to "Logout", '/logout' %>
 <% else %>
   <%= link_to 'Login', '/login' %> | <%= link_to 'Signup as Company', '/signupcompany' %> | <%= link_to 'Signup as Student', '/signupstudent' %>
 <% end %>

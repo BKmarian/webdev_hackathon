@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20151210101521) do
 
   create_table "companies", force: :cascade do |t|
     t.string "account"
-    t.string "nume"
+    t.string "name"
     t.string "password_digest"
   end
 
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 20151210101521) do
 
   create_table "students", force: :cascade do |t|
     t.string "account"
-    t.string "nume"
+    t.string "name"
     t.string "university"
     t.string "password_digest"
   end

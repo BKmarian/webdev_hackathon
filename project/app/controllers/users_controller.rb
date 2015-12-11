@@ -31,9 +31,9 @@ class UsersController < ApplicationController
 
   def user_params
     if session[:user_type] == "student"
-      params.require(:student).permit(:account, :nume, :university, :password, :password_confirmation)
+      params.require(:student).permit(:account, :name, :university, :password, :password_confirmation)
     else
-      params.require(:company).permit(:account, :nume, :password, :password_confirmation)
+      params.require(:company).permit(:account, :name, :password, :password_confirmation)
     end
   end
 end
