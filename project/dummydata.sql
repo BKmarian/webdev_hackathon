@@ -4,7 +4,7 @@ INSERT INTO companies VALUES(3,"Politehnica","politehnica","$2a$10$fwKrYq0pjLAWD
 INSERT INTO companies VALUES(4,"FACEBOOK","facebook","$2a$10$fwKrYq0pjLAWDVLwyL65Re/aMZVL1K.lIFMRAOCZpK8nhiyGAX4P6");
 
 INSERT INTO students VALUES(1,"sichitiumarian","sichitiu marian","UNIBUC","$2a$10$fwKrYq0pjLAWDVLwyL65Re/aMZVL1K.lIFMRAOCZpK8nhiyGAX4P6");
-INSERT INTO students VALUES(2,"belurobert","belurobert","ASE","$2a$10$fwKrYq0pjLAWDVLwyL65Re/aMZVL1K.lIFMRAOCZpK8nhiyGAX4P6");
+INSERT INTO students VALUES(2,"johndoe","johndoe","Facultatea de Moase","$2a$10$fwKrYq0pjLAWDVLwyL65Re/aMZVL1K.lIFMRAOCZpK8nhiyGAX4P6");
 
 INSERT INTO skills VALUES(1,"phyton",1);
 INSERT INTO skills VALUES(2,"C/C++",1);
