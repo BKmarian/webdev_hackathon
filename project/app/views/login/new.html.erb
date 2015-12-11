@@ -1,0 +1,22 @@
+<!-- app/views/sessions/new.html.erb -->
+<style type="text/css">
+ #my_id  {}
+</style>
+<!-- <h1>Login</h1>
+
+<%= form_tag '/login' do %>
+  Account: <%= text_field_tag :account %>
+  Password: <%= password_field_tag :password %>
+  <%= submit_tag "Submit" ,:id => 'my_id'%>
+
+<% end %>
+  -->
+<h1>Login</h1>
+ 
+<form accept-charset="UTF-8" action = "/login" method = "post" >
+  <span>
+     Account: <input id="account" name="account" type="text" />
+     Password: <input id="password" name="password" type="password" />
+  </span>
+  <button type = "submit">Submit</button>
+</form>
