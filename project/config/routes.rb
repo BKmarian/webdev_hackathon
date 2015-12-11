@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
   get '/' => 'gif#cool'
 
-  get '/login' => 'login#new'
-  get '/login' => 'login#new_company'
-  post '/login' => 'login#create'
+  get '/login' => 'login#loginpage'
+  post '/login' => 'login#authenticate'
   get '/logout' => 'login#destroy'
 
   get '/signupstudent' => 'users#new'

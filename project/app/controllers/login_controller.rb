@@ -1,8 +1,8 @@
 class LoginController < ApplicationController
-  skip_before_filter :verify_authenticity_token, :only => :create
-  def new
+  skip_before_filter :verify_authenticity_token, :only => :authenticate
+  def loginpage
   end
-  def create
+  def authenticate
     student = Student.find_by(:account => params[:account])
     # if the user exists AND the password entered is correct
     if student && student.authenticate(params[:password])
@@ -24,7 +24,7 @@ class LoginController < ApplicationController
 
   def destroy
     session[:user_account] = nil
-    redirect_to '/login'
+    redirect_to '/'
   end
 
 end
