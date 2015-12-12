@@ -1,10 +1,12 @@
 INSERT INTO companies VALUES(1,"BITDEFENDER","bitdefender","$2a$10$fwKrYq0pjLAWDVLwyL65Re/aMZVL1K.lIFMRAOCZpK8nhiyGAX4P6");
 INSERT INTO companies VALUES(2,"INTEL","intel","$2a$10$fwKrYq0pjLAWDVLwyL65Re/aMZVL1K.lIFMRAOCZpK8nhiyGAX4P6");
 INSERT INTO companies VALUES(3,"Politehnica","politehnica","$2a$10$fwKrYq0pjLAWDVLwyL65Re/aMZVL1K.lIFMRAOCZpK8nhiyGAX4P6");
-INSERT INTO companies VALUES(4,"FACEBOOK","facebook","$2a$10$fwKrYq0pjLAWDVLwyL65Re/aMZVL1K.lIFMRAOCZpK8nhiyGAX4P6");
+INSERT INTO companies VALUES(4,"FACEBOOK","facebook","$2a$08$I6ltN8UeijCKlunIJZ6j2uUxc.4u9XjRTdCeYSJnt9K6mm8V4EXie");
+INSERT INTO companies VALUES(5,"ggg","facebook","$2a$08$54s27gFQNjhhRaZR1L5zBOzTOJUt51QAG5iueGXWHXU4i2QcGDtgW");
 
 INSERT INTO students VALUES(1,"sichitiumarian","sichitiu marian","UNIBUC","$2a$10$fwKrYq0pjLAWDVLwyL65Re/aMZVL1K.lIFMRAOCZpK8nhiyGAX4P6");
 INSERT INTO students VALUES(2,"johndoe","johndoe","Facultatea de Moase","$2a$10$fwKrYq0pjLAWDVLwyL65Re/aMZVL1K.lIFMRAOCZpK8nhiyGAX4P6");
+INSERT INTO students VALUES(3,"alex","johndoe","Facultatea de Moase","$2a$08$Nk2OhSkPV7AJoTemxTAVYuAg6KJk0BzKGT4tQvMSunJh6X2x5GdCe");
 
 INSERT INTO skills VALUES(1,"phyton",1);
 INSERT INTO skills VALUES(2,"C/C++",1);
