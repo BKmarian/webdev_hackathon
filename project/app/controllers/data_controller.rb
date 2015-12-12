@@ -1,10 +1,13 @@
 class DataController < ActionController::Base
 
 	def jobs
-		@jobs_titles = Job.all.map(&:title)
-		@companies_names = Job.all.map{ |this_job| this_job.company.name }
+		@availaible_jobs = Job.all.select{ |job| (Application.find_by( :job_id => job.id ) != nil) ? 
+			(Application.find_by( :job_id => job.id ).student_id != Student.find_by( :email => session[:user_account] ).id) : true }
+		@jobs_ids = @availaible_jobs.map(&:id)
+		@jobs_titles = @availaible_jobs.map(&:title)
+		@companies_names = @availaible_jobs.map{ |this_job| ( (this_job.company != nil) ? this_job.company.name : nil) }
 
-		render :json => @jobs_titles.zip( @companies_names )
+		render :json => @jobs_titles.zip( @companies_names , @jobs_ids )
 	end
 
 	def companies
