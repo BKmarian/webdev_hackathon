@@ -1,9 +1,0 @@
-class GifController < ApplicationController
-  
-  before_filter :authorize
-
-  def cool
-	render "cool"
-  end
-
-end

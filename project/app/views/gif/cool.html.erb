@@ -39,10 +39,10 @@
 					
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="#"><span class="glyphicon glyphicon glyphicon-eye-open"></span> <%= 
-							if Student.where( account: session[:user_account] ).blank?
-								Company.where( account: session[:user_account] ).first.name
+							if Student.find_by( :email => session[:user_account] ).blank?
+								Company.find_by( :email => session[:user_account] ).name
 							else
-								Student.where( account: session[:user_account] ).first.name
+								Student.find_by( :email => session[:user_account] ).last_name
 							end %>  </a></li>
 						<li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
 					</ul>
