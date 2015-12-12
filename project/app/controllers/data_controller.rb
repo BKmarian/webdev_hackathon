@@ -14,4 +14,9 @@ class DataController < ActionController::Base
 		render :json => @companies_names.zip( @jobs )
 	end
 
+	def applications
+		student = Student.find_by(:email => session[:user_account])
+		@applications = Application.find_by(:student_id => student.id)
+		render json: @applications
+	end
 end

@@ -1,19 +1,9 @@
 class UsersController < ApplicationController
   #skip_before_filter :verify_authenticity_token, :only => :create
-  def new
-    session[:user_type] = "student"
-  end
 
-  def new_company
-    session[:user_type] = "company"
-  end
-
-  def create
-    if session[:user_type] == "student"
+  def studentnew
+      session[:user_type] = "student"
       user = Student.new(user_params)
-    else
-      user = Company.new(user_params)
-    end
     #user = User.new(:name => params[:name],:email => params[:email], :password_digest => params[:password])
     if user.save
       session[:user_account] = user.email
@@ -23,6 +13,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def companynew
+    session[:user_type] = "company"
+    user = Company.new(user_params)
+    if user.save
+      session[:user_account] = user.email
+      redirect_to '/cool'
+    else
+      redirect_to '/login'
+    end
+  end
   private
 
   def user_params
