@@ -15,5 +15,9 @@ Rails.application.routes.draw do
   get '/allSkills' => 'data#availaibleSkills'
 
   get '/getApplications' => 'data#applications'
+  post '/apply' => 'users#createapplication'
+
+
+  post '/search' => "data#search"
 
 end
