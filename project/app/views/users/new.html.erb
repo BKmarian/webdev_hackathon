@@ -1,12 +1,128 @@
-<h1>Signup!</h1>
+<h1>Sign up form</h1>
+<div class="container center">
+	<form accept-charset="UTF-8" action = "/users" method = "post" >
+		<div class="row">
 
-<%= form_for :student, url: '/users' do |f| %>
+			<div class="col-md-2 col-lg-2 col-sm-6 col-xs-6 col-md-offset-4">
+				<input class="form-control" id="first_name" name="student[first_name]" type="text" placeholder="First name">
+			</div>
 
-  Account: <%= f.text_field :account %>
-  Name: <%= f.text_field :name %>
-  University <%= f.text_field :university %>
-  Password: <%= f.password_field :password %>
-  Password Confirmation: <%= f.password_field :password_confirmation %>
-  <%= f.submit "Submit" %>
+			<div class="col-md-2 col-lg-2 col-sm-6 col-xs-6">
+				<input class="form-control" id="last_name" name="student[last_name]" type="text" placeholder="Last name">
+			</div>
 
-<% end %>
+		</div>
+
+		<br>
+
+		<div class="row">
+			<div class="col-md-4 col-lg-4 col-md-offset-4">
+				<input type="text" name = "student[email]" class="form-control" placeholder="Email address">
+			</div>
+		</div>
+
+		<br>
+
+		<div class="row">
+			<div class="col-md-3 col-lg-3 col-md-offset-4">
+				<input id="mobile_number" type="text" class="form-control" name = "student[mobile_number]" placeholder="Mobile number">
+			</div>
+		</div>
+		
+		<br>
+
+		<div class="row">
+			<div class="col-md-3 col-lg-3 col-md-offset-4">
+				<input id="university" type="text" class="form-control" name = "student[university]" placeholder="University">
+			</div>
+		</div>
+
+		<br>
+
+		<div class="row">
+			<div class="col-md-4 col-lg-4 col-md-offset-4">
+				<input id="password" name="student[password]" class="form-control" type="password" placeholder = "Password">
+			</div>
+		</div>
+
+		<br>
+
+		<div class="row">
+			<div class="col-md-4 col-lg-4 col-md-offset-4">
+				<input id="password_confirmation" name="student[password_confirmation]" class="form-control" type="password" placeholder ="Confirm Password" >
+			</div>
+		</div>
+
+		<br></br>
+		<br></br>
+
+		<p class="col-md-offset-4"> Limbaje si tehnologii </p>
+
+		<div class="col-md-offset-5">
+			<div class="row">
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" value="">
+						Stii python?
+					</label>
+				</div>
+
+				<div class="col-md-3">
+					<label for="select" class="control-label">Nivel? </label>
+					<select class="form-control" id="select">
+						<option value="one">Incepator</option>
+						<option value="two">Mediu</option>
+						<option value="three">Avansat</option>
+					</select>
+				</div>
+
+			</div>
+
+			<div class="row">
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" value="">
+						Stii Java?
+					</label>
+				</div>
+
+				<div class="col-md-3">
+					<label for="select" class="control-label">Nivel? </label>
+					<select class="form-control" id="select">
+						<option value="one">Incepator</option>
+						<option value="two">Mediu</option>
+						<option value="three">Avansat</option>
+					</select>
+				</div>
+
+			</div>
+
+			<div class="row">
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" value="">
+						Stii c++?
+					</label>
+				</div>
+
+				<div class="col-md-3">
+					<label for="select" class="control-label">Nivel? </label>
+					<select class="form-control" id="select">
+						<option value="one">Incepator</option>
+						<option value="two">Mediu</option>
+						<option value="three">Avansat</option>
+					</select>
+				</div>
+
+			</div>
+
+		</div>
+
+		<br></br>
+
+		<button class="btn btn-success col-lg-2 col-lg-offset-4" type="submit">Submit</button>
+		<br></br>
+	</form>
+</div>
+
+	<!-- Latest compiled and minified JavaScript -->

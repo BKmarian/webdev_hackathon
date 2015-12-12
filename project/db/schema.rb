@@ -22,8 +22,9 @@ ActiveRecord::Schema.define(version: 20151210101521) do
   add_index "applications", ["student_id"], name: "index_applications_on_student_id"
 
   create_table "companies", force: :cascade do |t|
-    t.string "account"
     t.string "name"
+    t.string "email"
+    t.string "mobile_number"
     t.string "password_digest"
   end
 
@@ -42,8 +43,10 @@ ActiveRecord::Schema.define(version: 20151210101521) do
   add_index "skills", ["student_id"], name: "index_skills_on_student_id"
 
   create_table "students", force: :cascade do |t|
-    t.string "account"
-    t.string "name"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "mobile_number"
     t.string "university"
     t.string "password_digest"
   end
