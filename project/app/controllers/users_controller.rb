@@ -33,8 +33,8 @@ class UsersController < ApplicationController
     puts
     puts  session[:user_account]
     puts
-    user_id = Student.find_by(:email => session[:user_account])
-    Application.create(:job_id => job_id,:student_id => user_id)
+    user = Student.find_by(:email => session[:user_account])
+    Application.create(:job_id => job_id,:student_id => user.id)
     redirect_to '/login'
   end
 
