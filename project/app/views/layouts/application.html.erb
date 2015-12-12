@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="AngularTable">
 <head>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -19,7 +19,27 @@
 		color: green; 
 	}
 </style>
-<body>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+<script>
+	var app = angular.module('AngularTable', ['ngRoute']);
+
+app.controller('AngularController', ['$scope', '$http', function($scope, $http) {
+  // begin
+
+  $scope.currentlyTalkingToTheServer = true;
+  $http.get('/getJobs.json')
+    .success(function(data, status, headers, config) {
+      $scope.items = data;
+      console.log(data[0][0]);
+      $scope.currentlyTalkingToTheServer = false;
+    })
+    .error(function(data, status, headers, config) {
+      console.log('Error when fetching items.');
+    });
+   window.sc = $scope;
+}]);
+</script>
+<body ng-controller="AngularController">
 
 	<div class="navbar navbar-fixed-top navbar-inverse">
 		<div class="container">
@@ -38,8 +58,11 @@
 			<div class="collpase navbar-collapse" id="example">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="#">Home</a></li>
-					<li><a href="">Stagii</a></li>
-					<li><a href="">Companii</a></li>
+					<li><a href="#">Stagii</a></li>
+					<li><a href="#">Companii</a></li>
+					<% if session[:user_type] == "student"%>
+					<li><a href="#">Applications</a></li>
+					<% end %>
 				</ul>
 				<% if session[:user_account] %>
 				<ul class="nav navbar-nav navbar-right"> 
@@ -298,7 +321,58 @@
 			</div>
 		</div>
 	</div>
+	<div class="container">
+		<div class="col-md-10 col-md-offset-1">
+			<div class="well">
 
+				<div class="tab-content">
+					<div class="tab-pane fade in active"  id="Home">
+					
+						 <div class="dropdown">
+              <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Sort By
+              <span class="caret"></span></button>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                <li role="presentation"><a role="menuitem" href="#">Ascending</a></li>
+                <li role="presentation"><a role="menuitem" href="#">Descending</a></li>
+              </ul>
+            </div>
+            
+            <hr>
+
+						  <table class="table table-condensed">
+						    <thead>
+						      <tr>
+						        <th>Job name</th>
+						        <th>Description</th>
+						        <th>Company</th>
+						      </tr>
+						    </thead>
+              
+						    <tbody>
+                  <tr ng-repeat="item in items">
+						        <th>{{item[0]}}</th>
+
+						        <th>{{item[1]}}</th>
+						  		<th>
+						  			<form>
+						  				<input type="hidden" value={{item[2]}}>
+						  				<button class="btn btn-info">Apply</button>
+						  			</form>
+
+						  		</th>
+						      </tr>
+						    </tbody>
+
+						  </table>
+
+					</div>
+
+					<div class="tab-pane fade"  id="About">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </body>

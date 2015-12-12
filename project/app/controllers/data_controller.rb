@@ -17,8 +17,16 @@ class DataController < ActionController::Base
 		render :json => @companies_names.zip( @jobs )
 	end
 
+<<<<<<< HEAD
 	def availaibleSkills
 		render :json => Skill.all.map(&:id).zip( Skill.all.map(&:name) )
 	end
 
+=======
+	def applications
+		student = Student.find_by(:email => session[:user_account])
+		@applications = Application.find_by(:student_id => student.id)
+		render json: @applications
+	end
+>>>>>>> 56e5d6fcbaad5faf1f45e97607811c91f97c528d
 end

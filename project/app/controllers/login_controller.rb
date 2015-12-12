@@ -1,7 +1,6 @@
 class LoginController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => :authenticate
-  def loginpage
-  end
+
   def authenticate
     student = Student.find_by(:email => params[:email])
     # if the user exists AND the password entered is correct
