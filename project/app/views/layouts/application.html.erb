@@ -38,8 +38,11 @@
 			<div class="collpase navbar-collapse" id="example">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="#">Home</a></li>
-					<li><a href="">Stagii</a></li>
-					<li><a href="">Companii</a></li>
+					<li><a href="#">Stagii</a></li>
+					<li><a href="#">Companii</a></li>
+					<% if session[:user_type] == "student"%>
+					<li><a href="#">Applications</a></li>
+					<% end %>
 				</ul>
 				<% if session[:user_account] %>
 				<ul class="nav navbar-nav navbar-right"> 
