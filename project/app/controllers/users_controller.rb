@@ -17,10 +17,6 @@ class UsersController < ApplicationController
     #user = User.new(:name => params[:name],:email => params[:email], :password_digest => params[:password])
     if user.save
       session[:user_account] = user.email
-      # if user.instance_of?Student
-      #   session[:user_type] = "student"
-      # else 
-      #   session[:user_type] = "company"
       redirect_to '/cool'
     else
       redirect_to '/login'
