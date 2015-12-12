@@ -14,4 +14,8 @@ class DataController < ActionController::Base
 		render :json => @companies_names.zip( @jobs )
 	end
 
+	def availaibleSkills
+		render :json => Skill.all.map(&:id).zip( Skill.all.map(&:name) )
+	end
+
 end
