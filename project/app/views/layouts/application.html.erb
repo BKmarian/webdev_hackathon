@@ -88,10 +88,10 @@ app.controller('AngularController', ['$scope', '$http', function($scope, $http) 
 					<li> <a href="#" data-toggle="modal" data-target="#modal-2"><span class="glyphicon glyphicon-log-in"></span> Log in</a></li>
 				</ul>
 				<% end %>
-				<form action="" class="navbar-form navbar-center" role="search">
+				<form action="/search" method="post" class="navbar-form navbar-center" role="search">
 					<div class="form-group">
 						<div class="col-xs-10">
-							<input type="text" class="form-control" placeholder="cauta stagii"></input>
+							<input type="text" name="search_text" class="form-control" placeholder="cauta stagii"></input>
 						</div>
 						<a href="" class="btn btn-info btn-md"><span class="glyphicon glyphicon-search"></span></a>
 					</div>
@@ -100,12 +100,6 @@ app.controller('AngularController', ['$scope', '$http', function($scope, $http) 
 			</div>
 		</div>
 	</div>
-
-<!-- 	<% if session[:user_account] %>
-	Signed in as <%= session[:user_account] %> ( <%= session[:user_type] == "student" ? Student : Company %> ) <%= link_to "Logout", '/logout' %>
-	<% else %>
-	<%= link_to 'Login', '/login' %> | <%= link_to 'Signup as Company', '/signupcompany' %> | <%= link_to 'Signup as Student', '/signupstudent' %>
-	<% end %> -->
 
 
 
