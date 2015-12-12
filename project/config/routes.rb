@@ -4,10 +4,8 @@ Rails.application.routes.draw do
   get '/login' => 'login#loginpage'
   post '/login' => 'login#authenticate'
   get '/logout' => 'login#destroy'
-
-  get '/signupstudent' => 'users#new'
-  get '/signupcompany' => 'users#new_company'
-  post '/users' => 'users#create'
+  post '/student_new' => 'users#studentnew'
+  post '/company_new' => 'users#companynew'
 
   get '/cool' => 'gif#cool'
 end
