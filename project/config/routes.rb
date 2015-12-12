@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   get '/getJobs' => 'data#jobs'
   get '/getCompanies' => 'data#companies'
   get '/getApplications' => 'data#applications'
+  post '/apply/:jobid' => 'users#createapplication'
 end
