@@ -23,20 +23,31 @@
 <script>
 	var app = angular.module('AngularTable', ['ngRoute']);
 
-	app.controller('AngularController', ['$scope', '$http', function($scope, $http) {
+app.controller('AngularController', ['$scope', '$http', function($scope, $http) {
   // begin
 
   $scope.currentlyTalkingToTheServer = true;
   $http.get('/getJobs.json')
-  .success(function(data, status, headers, config) {
-  	$scope.items = data;
-  	console.log(data[0][0]);
-  	$scope.currentlyTalkingToTheServer = false;
-  })
-  .error(function(data, status, headers, config) {
-  	console.log('Error when fetching items.');
-  });
-  window.sc = $scope;
+    .success(function(data, status, headers, config) {
+      $scope.items = data;
+      console.log(data[0][0]);
+      $scope.currentlyTalkingToTheServer = false;
+    })
+    .error(function(data, status, headers, config) {
+      console.log('Error when fetching items.');
+    });
+
+    $http.get('/getApplications.json')
+    .success(function(data, status, headers, config) {
+      $scope.applications = data;
+      console.log(data[0][0]);
+      $scope.currentlyTalkingToTheServer = false;
+    })
+    .error(function(data, status, headers, config) {
+      console.log('Error when fetching items.');
+    });
+
+   window.sc = $scope;
 }]);
 </script>
 <body ng-controller="AngularController">
@@ -77,10 +88,10 @@
 					<li> <a href="#" data-toggle="modal" data-target="#modal-2"><span class="glyphicon glyphicon-log-in"></span> Log in</a></li>
 				</ul>
 				<% end %>
-				<form action="" class="navbar-form navbar-center" role="search">
+				<form action="/search" method="post" class="navbar-form navbar-center" role="search">
 					<div class="form-group">
 						<div class="col-xs-10">
-							<input type="text" class="form-control" placeholder="cauta stagii"></input>
+							<input type="text" name="search_text" class="form-control" placeholder="cauta stagii"></input>
 						</div>
 						<a href="" class="btn btn-info btn-md"><span class="glyphicon glyphicon-search"></span></a>
 					</div>
@@ -89,12 +100,6 @@
 			</div>
 		</div>
 	</div>
-
-<!-- 	<% if session[:user_account] %>
-	Signed in as <%= session[:user_account] %> ( <%= session[:user_type] == "student" ? Student : Company %> ) <%= link_to "Logout", '/logout' %>
-	<% else %>
-	<%= link_to 'Login', '/login' %> | <%= link_to 'Signup as Company', '/signupcompany' %> | <%= link_to 'Signup as Student', '/signupstudent' %>
-	<% end %> -->
 
 
 
@@ -376,7 +381,49 @@
 				</div>
 			</div>
 		</div>
-		<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-	</body>
-	</html>
+	</div>
+
+	<br>
+	<br>
+
+	<div class="container">
+		<div class="col-md-10 col-md-offset-1">
+			<div class="well">
+
+				<div class="tab-content">
+					<div class="tab-pane fade in active"  id="Home">
+
+						<table class="table table-condensed">
+							<thead>
+								<tr>
+									<th>Job name</th>
+									<th>Description</th>
+									<th>Company</th>
+								</tr>
+							</thead>
+
+							<tbody>
+
+								<tr ng-repeat="appl in applications">
+									<th>{{appl[0]}}</th>
+									<th>{{appl[1]}}</th>
+									<th>{{appl[1]}}</th>
+								</tr>
+
+							</tbody>
+
+						</table>
+
+					</div>
+
+					<div class="tab-pane fade"  id="About">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</body>
+</html>
+
