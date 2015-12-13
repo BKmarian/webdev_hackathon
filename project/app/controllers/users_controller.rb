@@ -26,13 +26,6 @@ class UsersController < ApplicationController
 
   def createapplication
     job_id = params[:jobid]
-    puts
-    puts
-    puts job_id
-    puts
-    puts
-    puts  session[:user_account]
-    puts
     user = Student.find_by(:email => session[:user_account])
     Application.create(:job_id => job_id,:student_id => user.id)
     redirect_to '/login'

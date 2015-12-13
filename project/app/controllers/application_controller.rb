@@ -4,18 +4,9 @@ class ApplicationController < ActionController::Base
   #protect_from_forgery with: :exception
 
   def current_user
-    puts
-    puts
-    puts session[:user_account]
-    puts session[:user_account].class
-    puts
-    puts
     @current_user = Student.find_by(:email => session[:user_account])
     puts Student.where(:email => session[:user_account]).count
-    puts
-    #puts @current_user.email
-    puts
-    puts  
+
     session[:user_type] = "student"
     	if !@current_user
     		@current_user = Company.find_by(:email => session[:user_account])
