@@ -2,7 +2,7 @@ class DataController < ActionController::Base
 
 	def jobs
 
-		if session[:user_account] == nil
+		if session[:user_type] == nil
 			@availaible_jobs = Job.all
 		else
 			@student_applications = Application.where( student_id: Student.find_by( :email => session[:user_account] ) )
@@ -33,11 +33,16 @@ class DataController < ActionController::Base
 		render json: @applications
 	end
 
+	def setSearchWord
+		session[:search_text] = params[:search_text]
+	end
+
 	def search
 
-		@text = params[:search_text]
-
-		if session[:user_account] == nil
+		@text = session[:search_text]
+		@text = "intel"
+		
+		if session[:user_account] == "none"
 			@availaible_jobs = Job.all
 		else
 			@student_applications = Application.where( student_id: Student.find_by( :email => session[:user_account] ) )

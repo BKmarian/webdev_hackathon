@@ -22,9 +22,8 @@ class LoginController < ApplicationController
   end
 
   def destroy
-    puts "LOGOUT=================================================="
     session[:user_account] = nil
-    puts session[:user_account]
+    session[:user_type] = nil
     redirect_to '/'
   end
 
