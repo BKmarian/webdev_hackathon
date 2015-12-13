@@ -88,7 +88,7 @@ app.controller('AngularController', ['$scope', '$http', function($scope, $http) 
 					<li> <a href="#" data-toggle="modal" data-target="#modal-2"><span class="glyphicon glyphicon-log-in"></span> Log in</a></li>
 				</ul>
 				<% end %>
-				<form action="/search" method="post" class="navbar-form navbar-center" role="search">
+				<form action="/search" method="get" class="navbar-form navbar-center" role="search">
 					<div class="form-group">
 						<div class="col-xs-10">
 							<input type="text" name="search_text" class="form-control" placeholder="cauta stagii"></input>
