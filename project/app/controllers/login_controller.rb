@@ -8,23 +8,20 @@ class LoginController < ApplicationController
       # save the user id inside the browser cookie. This is how we keep the user logged in when they navigate around our website.
       session[:user_account] = student.email
       session[:user_type] = "student"
-      redirect_to '/'
     else
       company = Company.find_by(:email => params[:email])
       if company && company.authenticate(params[:password])
         session[:user_account] = company.email
         session[:user_type] = "company"
-        redirect_to '/'
-      else      
-        redirect_to '/login'
       end
     end
+    render nothing: true
   end
 
   def destroy
     session[:user_account] = nil
     session[:user_type] = nil
-    redirect_to '/'
+    render nothing: true
   end
 
 end

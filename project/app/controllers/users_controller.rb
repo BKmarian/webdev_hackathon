@@ -7,10 +7,8 @@ class UsersController < ApplicationController
     #user = User.new(:name => params[:name],:email => params[:email], :password_digest => params[:password])
     if user.save
       session[:user_account] = user.email
-      redirect_to '/cool'
-    else
-      redirect_to '/login'
     end
+    render nothing: true
   end
 
   def companynew
@@ -18,24 +16,15 @@ class UsersController < ApplicationController
     user = Company.new(user_params)
     if user.save
       session[:user_account] = user.email
-      redirect_to '/cool'
-    else
-      redirect_to '/login'
     end
+    render nothing: true
   end
 
   def createapplication
     job_id = params[:jobid]
-    puts
-    puts
-    puts job_id
-    puts
-    puts
-    puts  session[:user_account]
-    puts
     user = Student.find_by(:email => session[:user_account])
     Application.create(:job_id => job_id,:student_id => user.id)
-    redirect_to '/login'
+    render nothing: true
   end
 
   private

@@ -35,14 +35,14 @@ class DataController < ActionController::Base
 
 	def setSearchWord
 		session[:search_text] = params[:search_text]
+		redirect_to '/'
 	end
 
 	def search
 
-		@text = session[:search_text]
-		@text = "intel"
-		
-		if session[:user_account] == "none"
+		@text = params[:search_text]
+
+		if session[:user_account] == nil
 			@availaible_jobs = Job.all
 		else
 			@student_applications = Application.where( student_id: Student.find_by( :email => session[:user_account] ) )

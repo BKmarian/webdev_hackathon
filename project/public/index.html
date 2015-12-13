@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html ng-app="AngularTable">
+<head>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+	<title>Hackhaton</title>
+	<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+	<%= csrf_meta_tags %>
+</head>
+<style>
+	#popup {
+		margin-top: 4em;
+	}
+	#whitetext {
+		color: green; 
+	}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+<script>
+	var app = angular.module('AngularTable', ['ngRoute']);
+
+app.controller('AngularController', ['$scope', '$http', function($scope, $http) {
+  // begin
+
+  $scope.currentlyTalkingToTheServer = true;
+  $http.get('/getJobs.json')
+    .success(function(data, status, headers, config) {
+      $scope.items = data;
+      console.log(data[0][0]);
+      $scope.currentlyTalkingToTheServer = false;
+    })
+    .error(function(data, status, headers, config) {
+      console.log('Error when fetching items.');
+    });
+
+    $http.get('/getApplications.json')
+    .success(function(data, status, headers, config) {
+      $scope.applications = data;
+      console.log(data[0][0]);
+      $scope.currentlyTalkingToTheServer = false;
+    })
+    .error(function(data, status, headers, config) {
+      console.log('Error when fetching items.');
+    });
+
+   window.sc = $scope;
+}]);
+</script>
+<body ng-controller="AngularController">
+
+	<div class="navbar navbar-fixed-top navbar-inverse">
+		<div class="container">
+			
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a href="" class="navbar-brand">Stagii practica</a>
+			</div>
+
+			<div class="collpase navbar-collapse" id="example">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Home</a></li>
+					<li><a href="#">Stagii</a></li>
+					<li><a href="#">Companii</a></li>
+					<li><a href="#">Applications</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right"> 
+
+					<li> <a href="#"> Signed in as <span id ="whitetext"> <span> </a></li>
+					<li> <a href="/logout">Logout</a></li>
+				</ul>
+				<% else %>
+				<ul class="nav navbar-nav navbar-right">
+					<li> <a href="#" data-toggle="modal" data-target="#modal-1"><span class="glyphicon glyphicon-user"></span> Sign up as User</a> </li>	
+					<li> <a href="#" data-toggle="modal" data-target="#modal-3"><span class="glyphicon glyphicon-user"></span> Sign Up as Company</a> </li>
+					<li> <a href="#" data-toggle="modal" data-target="#modal-2"><span class="glyphicon glyphicon-log-in"></span> Log in</a></li>
+				</ul>
+				<% end %>
+				<form action="/search" method="get" class="navbar-form navbar-center" role="search">
+					<div class="form-group">
+						<div class="col-xs-10">
+							<input type="text" name="search_text" class="form-control" placeholder="cauta stagii"></input>
+						</div>
+						<a href="" class="btn btn-info btn-md"><span class="glyphicon glyphicon-search"></span></a>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+
+	<div class="container" id="popup">
+		<div class="modal fade" id="modal-1">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+
+					<div class="modal-body">
+						<h1>Sign up form</h1>
+						<div class="container center">
+							<form accept-charset="UTF-8" action = "/student_new" method = "post" >
+								<div class="row">
+
+									<div class="col-md-2 col-lg-2 col-sm-6 col-xs-6 col-md-offset-4">
+										<input class="form-control" id="first_name" name="student[first_name]" type="text" placeholder="First name">
+									</div>
+
+									<div class="col-md-2 col-lg-2 col-sm-6 col-xs-6">
+										<input class="form-control" id="last_name" name="student[last_name]" type="text" placeholder="Last name">
+									</div>
+
+								</div>
+
+								<br>
+
+								<div class="row">
+									<div class="col-md-4 col-lg-4 col-md-offset-4">
+										<input type="text" name = "student[email]" class="form-control" placeholder="Email address">
+									</div>
+								</div>
+
+								<br>
+
+								<div class="row">
+									<div class="col-md-3 col-lg-3 col-md-offset-4">
+										<input id="mobile_number" type="text" class="form-control" name = "student[mobile_number]" placeholder="Mobile number">
+									</div>
+								</div>
+
+								<br>
+
+								<div class="row">
+									<div class="col-md-3 col-lg-3 col-md-offset-4">
+										<input id="university" type="text" class="form-control" name = "student[university]" placeholder="University">
+									</div>
+								</div>
+
+								<br>
+
+								<div class="row">
+									<div class="col-md-4 col-lg-4 col-md-offset-4">
+										<input id="password" name="student[password]" class="form-control" type="password" placeholder = "Password">
+									</div>
+								</div>
+
+								<br>
+
+								<div class="row">
+									<div class="col-md-4 col-lg-4 col-md-offset-4">
+										<input id="password_confirmation" name="student[password_confirmation]" class="form-control" type="password" placeholder ="Confirm Password" >
+									</div>
+								</div>
+
+								<br></br>
+								<br></br>
+
+								<p class="col-md-offset-4"> Limbaje si tehnologii </p>
+
+								<div class="col-md-offset-5">
+									<div class="row">
+										<div class="checkbox">
+											<label>
+												<input type="checkbox" value="">
+												Stii python?
+											</label>
+										</div>
+
+										<div class="col-md-3">
+											<label for="select" class="control-label">Nivel? </label>
+											<select class="form-control" id="select">
+												<option value="one">Incepator</option>
+												<option value="two">Mediu</option>
+												<option value="three">Avansat</option>
+											</select>
+										</div>
+
+									</div>
+
+									<div class="row">
+										<div class="checkbox">
+											<label>
+												<input type="checkbox" value="">
+												Stii Java?
+											</label>
+										</div>
+
+										<div class="col-md-3">
+											<label for="select" class="control-label">Nivel? </label>
+											<select class="form-control" id="select">
+												<option value="one">Incepator</option>
+												<option value="two">Mediu</option>
+												<option value="three">Avansat</option>
+											</select>
+										</div>
+
+									</div>
+
+									<div class="row">
+										<div class="checkbox">
+											<label>
+												<input type="checkbox" value="">
+												Stii c++?
+											</label>
+										</div>
+
+										<div class="col-md-3">
+											<label for="select" class="control-label">Nivel? </label>
+											<select class="form-control" id="select">
+												<option value="one">Incepator</option>
+												<option value="two">Mediu</option>
+												<option value="three">Avansat</option>
+											</select>
+										</div>
+
+									</div>
+
+								</div>
+
+								<br></br>
+
+								<button class="btn btn-success col-lg-2 col-lg-offset-4" type="submit">Submit</button>
+								<br></br>
+							</form>
+						</div>
+					</div>
+
+					<!-- Latest compiled and minified JavaScript -->
+				</div>
+
+			</div>
+		</div>
+
+		<div class="modal fade" id="modal-2">
+
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+
+					<div class="modal-body">
+						<form class="form-inline" accept-charset="UTF-8" action = "/login" method = "post" >
+							<span>
+								<input id="email" class="form-control" name="email" type="text" placeholder="Nume utilizator"/>
+								<input id="password" class="form-control" name="password" type="password" placeholder="parola" />
+							</span>
+							<button type="submit" class="btn btn-default">Sign in</button>
+						</form>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+	<div class="container" id="popup">
+		<div class="modal fade" id="modal-3">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+
+					<div class="modal-body">
+						<h1>Sign up form</h1>
+						<div class="container center">
+							<form accept-charset="UTF-8" action = "/company_new" method = "post" >
+								<div class="row">
+
+									<div class="col-md-4 col-lg-4 col-md-offset-4">
+										<input class="form-control" id="first_name" name="company[name]" type="text" placeholder="Company name">
+									</div>
+								</div>
+
+								<br>
+
+								<div class="row">
+									<div class="col-md-4 col-lg-4 col-md-offset-4">
+										<input type="text" name = "company[email]" class="form-control" placeholder="Email address">
+									</div>
+								</div>
+
+								<br>
+
+								<div class="row">
+									<div class="col-md-3 col-lg-3 col-md-offset-4">
+										<input id="mobile_number" type="text" class="form-control" name = "company[mobile_number]" placeholder="Mobile number">
+									</div>
+								</div>
+
+								<br>
+
+								<div class="row">
+									<div class="col-md-4 col-lg-4 col-md-offset-4">
+										<input id="password" name="company[password]" class="form-control" type="password" placeholder = "Password">
+									</div>
+								</div>
+
+								<br>
+
+								<div class="row">
+									<div class="col-md-4 col-lg-4 col-md-offset-4">
+										<input id="password_confirmation" name="company[password_confirmation]" class="form-control" type="password" placeholder ="Confirm Password" >
+									</div>
+								</div>
+
+
+								<br></br>
+								<br></br>
+
+								<button class="btn btn-success col-lg-2 col-lg-offset-4" type="submit">Submit</button>
+								<br></br>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="col-md-10 col-md-offset-1">
+			<div class="well">
+
+				<div class="tab-content">
+					<div class="tab-pane fade in active"  id="Home">
+
+						<div class="dropdown">
+							<button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Sort By
+								<span class="caret"></span></button>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+									<li role="presentation"><a role="menuitem" href="#">Ascending</a></li>
+									<li role="presentation"><a role="menuitem" href="#">Descending</a></li>
+								</ul>
+							</div>
+
+							<hr>
+
+							<table class="table table-condensed">
+								<thead>
+									<tr>
+										<th>Job name</th>
+										<th>Company</th>
+										<th>Apply</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr ng-repeat="item in items">
+										<th>{{item[0]}}</th>
+
+										<th>{{item[1]}}</th>
+										<th>
+											<form action="{{'/apply/' + item[2]}}" method = "post">
+												<!-- <input type="hidden" value="{{item[2]}}" name = "jobid"> -->
+												<button type = "submit" class="btn btn-info">Apply</button>
+											</form>
+										</th>
+									</tr>
+								</tbody>
+
+							</table>
+
+						</div>
+
+						<div class="tab-pane fade"  id="About">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<br>
+	<br>
+
+	<div class="container">
+		<div class="col-md-10 col-md-offset-1">
+			<div class="well">
+
+				<div class="tab-content">
+					<div class="tab-pane fade in active"  id="Home">
+
+						<table class="table table-condensed">
+							<thead>
+								<tr>
+									<th>Job name</th>
+									<th>Description</th>
+									<th>Company</th>
+								</tr>
+							</thead>
+
+							<tbody>
+
+								<tr ng-repeat="appl in applications">
+									<th>{{appl[0]}}</th>
+									<th>{{appl[1]}}</th>
+									<th>{{appl[1]}}</th>
+								</tr>
+
+							</tbody>
+
+						</table>
+
+					</div>
+
+					<div class="tab-pane fade"  id="About">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</body>
+</html>
+
