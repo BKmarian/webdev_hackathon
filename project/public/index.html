@@ -47,6 +47,28 @@ app.controller('AngularController', ['$scope', '$http', function($scope, $http) 
       console.log('Error when fetching items.');
     });
 
+    function logOutAction() {
+	    $http.get('/logout')
+	    .success(function(data, status, headers, config) {
+	      console.log("log out succes");
+	    })
+	    .error(function(data, status, headers, config) {
+	      console.log('log out error');
+	    });
+	}
+    $scope.logOutAction = logOutAction;
+
+    function logInAction() {
+	    $http.get('/login')
+	    .success(function(data, status, headers, config) {
+	      console.log("log out succes");
+	    })
+	    .error(function(data, status, headers, config) {
+	      console.log('log out error');
+	    });
+	}
+    $scope.logInAction = logInAction;
+
    window.sc = $scope;
 }]);
 </script>
@@ -76,7 +98,7 @@ app.controller('AngularController', ['$scope', '$http', function($scope, $http) 
 				<ul class="nav navbar-nav navbar-right"> 
 
 					<li> <a href="#"> Signed in as <span id ="whitetext"> <span> </a></li>
-					<li> <a href="/logout">Logout</a></li>
+					<li> <a href ng-click="logOutAction();">Logout</a></li>
 				</ul>
 				<% else %>
 				<ul class="nav navbar-nav navbar-right">
@@ -246,7 +268,7 @@ app.controller('AngularController', ['$scope', '$http', function($scope, $http) 
 				<div class="modal-content">
 
 					<div class="modal-body">
-						<form class="form-inline" accept-charset="UTF-8" action = "/login" method = "post" >
+						<form class="form-inline" accept-charset="UTF-8" action ng-click="logInAction();" >
 							<span>
 								<input id="email" class="form-control" name="email" type="text" placeholder="Nume utilizator"/>
 								<input id="password" class="form-control" name="password" type="password" placeholder="parola" />

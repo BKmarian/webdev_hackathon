@@ -7,6 +7,7 @@ INSERT INTO companies VALUES(5,"ggg","facebook","salam","$2a$08$e9J5Go8Fki4BCHeI
 INSERT INTO students VALUES(1,"sichitiumarian","sichitiu marian","UNIBUC","$2a$10$fwKrYq0pjLAWDVLwyL65Re/aMZVL1K.lIFMRAOCZpK8nhiyGAX4P6");
 INSERT INTO students VALUES(2,"johndoe","johndoe","Facultatea de Moase","$2a$10$fwKrYq0pjLAWDVLwyL65Re/aMZVL1K.lIFMRAOCZpK8nhiyGAX4P6");
 INSERT INTO students VALUES(3,"alex","johndoe","Facultatea de Moase","$2a$08$Nk2OhSkPV7AJoTemxTAVYuAg6KJk0BzKGT4tQvMSunJh6X2x5GdCe");
+INSERT INTO students VALUES(12,"dddd","johndoe", "rrr" , "0087654345678" ,"Facultatea de Moase","$2a$08$tq7PD/S1YnfzLb95hRWUO.Dn3MAp74GehKgg202M0z/cneHPH/mU2");
 
 INSERT INTO skills VALUES(1,"phyton",1);
 INSERT INTO skills VALUES(2,"C/C++",1);

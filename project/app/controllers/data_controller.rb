@@ -29,13 +29,13 @@ class DataController < ActionController::Base
 
 	def applications
 		student = Student.find_by(:email => session[:user_account])
-		@applications = Application.find_by(:student_id => student.id)
+		student = nil
+		if student != nil 
+			@applications = Application.where(student_id: student.id)
+		else
+			@applications = []
+		end
 		render json: @applications
-	end
-
-	def setSearchWord
-		session[:search_text] = params[:search_text]
-		redirect_to '/'
 	end
 
 	def search

@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-  get '/' => 'login#authenticate'
 
-  get '/login' => 'login#authenticate'
   post '/login' => 'login#authenticate'
   get '/logout' => 'login#destroy'
   post '/student_new' => 'users#studentnew'
@@ -15,6 +13,6 @@ Rails.application.routes.draw do
   get '/getApplications' => 'data#applications'
   post '/apply/:jobid' => 'users#createapplication'
   
-  post '/search/:search_text' => "data#search"
+  post '/search' => "data#search"
 
 end
