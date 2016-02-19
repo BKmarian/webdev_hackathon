@@ -4,23 +4,11 @@ class ApplicationController < ActionController::Base
   #protect_from_forgery with: :exception
 
   def current_user
-    puts
-    puts
-    puts session[:user_account]
-    puts session[:user_account].class
-    puts
-    puts
     @current_user = Student.find_by(:email => session[:user_account])
     puts Student.where(:email => session[:user_account]).count
-    puts
-    #puts @current_user.email
-    puts
-    puts  
-    session[:user_type] = "student"
-    	if !@current_user
-    		@current_user = Company.find_by(:email => session[:user_account])
-    		session[:user_type] = "company"
-    	end
+    if !@current_user
+      @current_user = Company.find_by(:email => session[:user_account])
+    end
     @current_user
   end
   helper_method :current_user #face metoda current_user vizibila de catre view
@@ -29,4 +17,21 @@ class ApplicationController < ActionController::Base
     redirect_to '/login' unless current_user
   end
 
+  def search
+
+    text = params[:search_text]
+    if session[:user_type] == "student"
+      #@jobs = Job.all.select { |k| k.title.downcase.start_with?(text.downcase) }
+      @jobs = Job.all.select { |k| /#{text.downcase}/.match(k.title.downcase) }
+      render template: "users/job"
+    else
+      if session[:user_type] == "company"
+        #@apps = Application.all.select { |k| k.student.name.downcase.start_with?(text.downcase) }
+        @apps = Application.all.select { |k| /#{text.downcase}/.match(k.student.name.downcase) }
+        render template: "users/app"
+      else
+        redirect_to :back
+      end
+    end
+  end
 end

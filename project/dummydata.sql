@@ -1,10 +1,10 @@
-INSERT INTO companies VALUES(1,"BITDEFENDER","bitdefender","$2a$10$fwKrYq0pjLAWDVLwyL65Re/aMZVL1K.lIFMRAOCZpK8nhiyGAX4P6");
-INSERT INTO companies VALUES(2,"INTEL","intel","$2a$10$fwKrYq0pjLAWDVLwyL65Re/aMZVL1K.lIFMRAOCZpK8nhiyGAX4P6");
-INSERT INTO companies VALUES(3,"Politehnica","politehnica","$2a$10$fwKrYq0pjLAWDVLwyL65Re/aMZVL1K.lIFMRAOCZpK8nhiyGAX4P6");
-INSERT INTO companies VALUES(4,"FACEBOOK","facebook","$2a$10$fwKrYq0pjLAWDVLwyL65Re/aMZVL1K.lIFMRAOCZpK8nhiyGAX4P6");
+INSERT INTO companies VALUES(1,"BITDEFENDER","bitdefender","0730240089","$2a$08$7lM1mKvFCZFn2a1ciQfsKOpXFk1bUwGg1qNBCN1gZCoOLtig/u5xe");
+INSERT INTO companies VALUES(2,"INTEL","intel","0730240089","$2a$08$7lM1mKvFCZFn2a1ciQfsKOpXFk1bUwGg1qNBCN1gZCoOLtig/u5xe");
+INSERT INTO companies VALUES(3,"Politehnica","politehnica","0730240089","$2a$08$7lM1mKvFCZFn2a1ciQfsKOpXFk1bUwGg1qNBCN1gZCoOLtig/u5xe");
+INSERT INTO companies VALUES(4,"FACEBOOK","facebook","0730240089","$2a$08$7lM1mKvFCZFn2a1ciQfsKOpXFk1bUwGg1qNBCN1gZCoOLtig/u5xe");
 
-INSERT INTO students VALUES(1,"sichitiumarian","sichitiu marian","UNIBUC","$2a$10$fwKrYq0pjLAWDVLwyL65Re/aMZVL1K.lIFMRAOCZpK8nhiyGAX4P6");
-INSERT INTO students VALUES(2,"johndoe","johndoe","Facultatea de Moase","$2a$10$fwKrYq0pjLAWDVLwyL65Re/aMZVL1K.lIFMRAOCZpK8nhiyGAX4P6");
+INSERT INTO students VALUES(1,"sichitiumarian","sichitiu","marian","UNIBUC","0730240089","$2a$08$7lM1mKvFCZFn2a1ciQfsKOpXFk1bUwGg1qNBCN1gZCoOLtig/u5xe");
+INSERT INTO students VALUES(2,"johndoe","john","doe","Facultatea de Moase","0730240089","$2a$08$7lM1mKvFCZFn2a1ciQfsKOpXFk1bUwGg1qNBCN1gZCoOLtig/u5xe");
 
 INSERT INTO skills VALUES(1,"phyton",1);
 INSERT INTO skills VALUES(2,"C/C++",1);
