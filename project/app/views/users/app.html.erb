@@ -25,15 +25,13 @@
 									<% if app.status == 1 %>
 									<th>ACCEPTED</th>
 									<% else %>
-									<th>
-										<span>
-											<form action="/accept/<%= app.id %>" method = "post">
+									<th style = "display:inline-block">
+											<form action="/accept/<%= app.id %>" method = "post" style="float:left;">
 												<button type = "submit"><span class="glyphicon glyphicon-ok"></span></button>
 											</form>
-											<form action="/remove/<%= app.id %>" method = "post">
-												<button type = "submit"><span class="glyphicon glyphicon-remove"></span></button>
+											<form action="/remove/<%= app.id %>" method = "post" style="float:right;">
+												<button type = "submit"><span class="glyphicon glyphicon-remove" ></span></button>
 											</form>
-										</span>
 									</th>
 									<% end %>
 								</tr>
