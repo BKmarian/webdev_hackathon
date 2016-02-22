@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get '/' => 'login#loginpage'
   get '/app' => "users#app"
   get '/jobs' => "users#job"
   get '/findjobs' => 'login#loginpage'
