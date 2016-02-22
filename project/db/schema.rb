@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 20151210101521) do
   create_table "applications", force: :cascade do |t|
     t.integer "job_id"
     t.integer "student_id"
+    t.integer "status",     default: 0
   end
 
   add_index "applications", ["job_id"], name: "index_applications_on_job_id"

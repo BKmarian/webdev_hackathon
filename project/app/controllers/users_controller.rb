@@ -15,11 +15,22 @@ class UsersController < ApplicationController
     if user.save
       session[:user_account] = user.email
     end
-   redirect_to :back
+    redirect_to :back
+  end
+
+  def app
+   @company = Company.find_by(:email => session[:user_account])
+   @apps = Application.all
+   #@apps = Application.where(:company => company)
  end
 
- def app
-   @apps = Application.all
+ def new_job
+   title = params[:title]
+   account = session[:user_account]
+   company = Company.find_by(:email => account)
+   job = Job.new(:title => title, :company_id => company.id)
+   job.save
+   redirect_to :back   
  end
 
  def job
@@ -32,7 +43,7 @@ class UsersController < ApplicationController
   application = Application.new(:job_id => job_id , :student_id => user.id)
   application.save
   redirect_to :back
- end
+end
 
 private
 

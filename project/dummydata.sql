@@ -30,7 +30,7 @@ INSERT INTO jobs VALUES(13,"Software Enginner",4);
 INSERT INTO jobs VALUES(14,"Programmer",4);
 INSERT INTO jobs VALUES(15,"HR",4);
 
-INSERT INTO applications VALUES(1,1,1);
-INSERT INTO applications VALUES(2,2,1);
-INSERT INTO applications VALUES(3,3,2);
-INSERT INTO applications VALUES(4,4,2);
+INSERT INTO applications VALUES(1,1,1,0);
+INSERT INTO applications VALUES(2,2,1,0);
+INSERT INTO applications VALUES(3,3,2,0);
+INSERT INTO applications VALUES(4,4,2,0);

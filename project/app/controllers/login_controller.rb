@@ -1,6 +1,7 @@
 class LoginController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => :authenticate
   def loginpage
+    render template: '/layouts/application'
   end
   def authenticate
     student = Student.find_by(:email => params[:email])

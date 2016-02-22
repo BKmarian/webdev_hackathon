@@ -22,16 +22,32 @@ class ApplicationController < ActionController::Base
     text = params[:search_text]
     if session[:user_type] == "student"
       #@jobs = Job.all.select { |k| k.title.downcase.start_with?(text.downcase) }
-      @jobs = Job.all.select { |k| /#{text.downcase}/.match(k.title.downcase) }
+      @jobs = Job.all.select { |k| /#{text.downcase}/.match(k.title.downcase)  || /#{text.downcase}/.match(k.company.name.downcase)}
       render template: "users/job"
     else
       if session[:user_type] == "company"
         #@apps = Application.all.select { |k| k.student.name.downcase.start_with?(text.downcase) }
-        @apps = Application.all.select { |k| /#{text.downcase}/.match(k.student.name.downcase) }
+        @apps = Application.all.select { |k| /#{text.downcase}/.match(k.student.email.downcase) || /#{text.downcase}/.match(k.job.title.downcase) }
         render template: "users/app"
       else
         redirect_to :back
       end
     end
+  end
+
+  def accept
+    app = params[:app_id]
+    application = Application.find_by(:id => app)
+    application.status = 1
+    application.save
+    redirect_to :back
+    
+  end
+
+  def remove
+    app = params[:app_id]
+    application = Application.find_by(:id => app)
+    Application.destroy(application)
+    redirect_to :back
   end
 end
