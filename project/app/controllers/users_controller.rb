@@ -1,39 +1,57 @@
 class UsersController < ApplicationController
   #skip_before_filter :verify_authenticity_token, :only => :create
-
-  def studentnew
-      session[:user_type] = "student"
-      user = Student.new(user_params)
-    #user = User.new(:name => params[:name],:email => params[:email], :password_digest => params[:password])
+  def new_student
+    session[:user_type] = "student"
+    user = Student.new(user_params)
     if user.save
       session[:user_account] = user.email
     end
-    render nothing: true
+    redirect_to :back
   end
 
-  def companynew
+  def new_company
     session[:user_type] = "company"
     user = Company.new(user_params)
     if user.save
       session[:user_account] = user.email
     end
-    render nothing: true
+    redirect_to :back
   end
 
-  def createapplication
-    job_id = params[:jobid]
-    user = Student.find_by(:email => session[:user_account])
-    Application.create(:job_id => job_id,:student_id => user.id)
-    render nothing: true
-  end
+  def app
+   @company = Company.find_by(:email => session[:user_account])
+   @apps = Application.all
+   #@apps = Application.where(:company => company)
+ end
 
-  private
+ def new_job
+   title = params[:title]
+   account = session[:user_account]
+   company = Company.find_by(:email => account)
+   job = Job.new(:title => title, :company_id => company.id)
+   job.save
+   redirect_to :back   
+ end
 
-  def user_params
-    if session[:user_type] == "student"
-      params.require(:student).permit(:first_name, :last_name, :email , :mobile_number, :university, :password, :password_confirmation)
-    else
-      params.require(:company).permit(:name, :email, :mobile_number, :password, :password_confirmation)
-    end
+ def job
+   @jobs = Job.all
+ end
+
+ def apply
+  job_id = params[:job_id]
+  user = Student.find_by(:email => session[:user_account])
+  application = Application.new(:job_id => job_id , :student_id => user.id)
+  application.save
+  redirect_to :back
+end
+
+private
+
+def user_params
+  if session[:user_type] == "student"
+    params.require(:student).permit(:first_name, :last_name, :email , :mobile_number, :university, :password, :password_confirmation)
+  else
+    params.require(:company).permit(:name, :email, :mobile_number, :password, :password_confirmation)
   end
+end
 end

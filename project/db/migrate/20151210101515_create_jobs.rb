@@ -9,6 +9,7 @@ class CreateJobs < ActiveRecord::Migration
     create_table :applications do |t|
     	t.belongs_to :job , index: true
     	t.belongs_to :student, index: true
+        t.integer :status , default: 0
     end
   end
 end

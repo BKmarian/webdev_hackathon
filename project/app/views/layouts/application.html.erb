@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html ng-app="AngularTable">
+<html>
 <head>
-	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 
 	<!-- Optional theme -->
@@ -11,46 +10,7 @@
 	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 	<%= csrf_meta_tags %>
 </head>
-<style>
-	#popup {
-		margin-top: 4em;
-	}
-	#whitetext {
-		color: green; 
-	}
-</style>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
-<script>
-	var app = angular.module('AngularTable', ['ngRoute']);
-
-app.controller('AngularController', ['$scope', '$http', function($scope, $http) {
-  // begin
-
-  $scope.currentlyTalkingToTheServer = true;
-  $http.get('/getJobs.json')
-    .success(function(data, status, headers, config) {
-      $scope.items = data;
-      console.log(data[0][0]);
-      $scope.currentlyTalkingToTheServer = false;
-    })
-    .error(function(data, status, headers, config) {
-      console.log('Error when fetching items.');
-    });
-
-    $http.get('/getApplications.json')
-    .success(function(data, status, headers, config) {
-      $scope.applications = data;
-      console.log(data[0][0]);
-      $scope.currentlyTalkingToTheServer = false;
-    })
-    .error(function(data, status, headers, config) {
-      console.log('Error when fetching items.');
-    });
-
-   window.sc = $scope;
-}]);
-</script>
-<body ng-controller="AngularController">
+<body background="jobs.jpg">
 
 	<div class="navbar navbar-fixed-top navbar-inverse">
 		<div class="container">
@@ -63,20 +23,24 @@ app.controller('AngularController', ['$scope', '$http', function($scope, $http) 
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a href="" class="navbar-brand">Stagii practica</a>
+				<a href="#" class="navbar-brand">Stagii practica</a>
 			</div>
 
 			<div class="collpase navbar-collapse" id="example">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="#">Home</a></li>
-					<li><a href="#">Companii</a></li>
+					<li class="active"><a href="/login">Home</a></li>
 					<% if session[:user_type] == "student"%>
-					<li><a href="#">Applications</a></li>
+					<li><a href="/jobs">Stagii</a></li>
+					<% end %>
+					<% if session[:user_type] == "company"%>
+					<li><a href="/app">Applications</a></li>
 					<% end %>
 				</ul>
 				<% if session[:user_account] %>
-				<ul class="nav navbar-nav navbar-right"> 
-
+				<ul class="nav navbar-nav navbar-right">
+					<% if session[:user_type] == 'company'%> 
+					<li> <a href="#" data-toggle="modal" data-target="#modal-4"><span class="glyphicon glyphicon-log-in"></span> Create job</a></li>
+					<% end %>
 					<li> <a href="#"> Signed in as <span id ="whitetext"> <%= session[:user_account] %> ( <%= session[:user_type] == "student" ? Student : Company %> ) <span> </a></li>
 					<li> <a href="/logout">Logout</a></li>
 				</ul>
@@ -87,12 +51,12 @@ app.controller('AngularController', ['$scope', '$http', function($scope, $http) 
 					<li> <a href="#" data-toggle="modal" data-target="#modal-2"><span class="glyphicon glyphicon-log-in"></span> Log in</a></li>
 				</ul>
 				<% end %>
-				<form action="/search" method="get" class="navbar-form navbar-center" role="search">
+				<form action="/search" method="post" class="navbar-form navbar-center" role="search">
 					<div class="form-group">
 						<div class="col-xs-10">
 							<input type="text" name="search_text" class="form-control" placeholder="cauta stagii"></input>
 						</div>
-						<a href="" class="btn btn-info btn-md"><span class="glyphicon glyphicon-search"></span></a>
+						<button  type = "submit" class="btn btn-info btn-md"><span class="glyphicon glyphicon-search"></span></button>
 					</div>
 
 				</form>
@@ -103,6 +67,24 @@ app.controller('AngularController', ['$scope', '$http', function($scope, $http) 
 
 
 	<div class="container" id="popup">
+		<div class="modal fade" id="modal-4">
+
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+
+					<div class="modal-body">
+					<h4>Create job</h4>
+						<form class="form-inline" accept-charset="UTF-8" action = "/create_job" method = "post" >
+							<span>
+								<input id="title" class="form-control" name="title" type="text" placeholder="Titlu job"/>
+							</span>
+							<button type="submit" class="btn btn-default">Create</button>
+						</form>
+
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="modal fade" id="modal-1">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
@@ -110,7 +92,7 @@ app.controller('AngularController', ['$scope', '$http', function($scope, $http) 
 					<div class="modal-body">
 						<h1>Sign up form</h1>
 						<div class="container center">
-							<form accept-charset="UTF-8" action = "/student_new" method = "post" >
+							<form accept-charset="UTF-8" action = "/signupstudent" method = "post" >
 								<div class="row">
 
 									<div class="col-md-2 col-lg-2 col-sm-6 col-xs-6 col-md-offset-4">
@@ -272,7 +254,7 @@ app.controller('AngularController', ['$scope', '$http', function($scope, $http) 
 					<div class="modal-body">
 						<h1>Sign up form</h1>
 						<div class="container center">
-							<form accept-charset="UTF-8" action = "/company_new" method = "post" >
+							<form accept-charset="UTF-8" action = "/signupcompany" method = "post" >
 								<div class="row">
 
 									<div class="col-md-4 col-lg-4 col-md-offset-4">
@@ -325,104 +307,11 @@ app.controller('AngularController', ['$scope', '$http', function($scope, $http) 
 			</div>
 		</div>
 	</div>
-	<div class="container">
-		<div class="col-md-10 col-md-offset-1">
-			<div class="well">
-
-				<div class="tab-content">
-					<div class="tab-pane fade in active"  id="Home">
-
-						<div class="dropdown">
-							<button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Sort By
-								<span class="caret"></span></button>
-								<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-									<li role="presentation"><a role="menuitem" href="#">Ascending</a></li>
-									<li role="presentation"><a role="menuitem" href="#">Descending</a></li>
-								</ul>
-							</div>
-
-							<hr>
-
-							<table class="table table-condensed">
-								<thead>
-									<tr>
-										<th>Job name</th>
-										<th>Company</th>
-										<% if session[:user_type] == "student"%>
-										<th>Apply</th>
-										<% end %>
-									</tr>
-								</thead>
-
-								<tbody>
-									<tr ng-repeat="item in items">
-										<th>{{item[0]}}</th>
-
-										<th>{{item[1]}}</th>
-										<th>
-											<% if session[:user_type] == "student"%>
-											<form action="{{'/apply/' + item[2]}}" method = "post">
-												<!-- <input type="hidden" value="{{item[2]}}" name = "jobid"> -->
-												<button type = "submit" class="btn btn-info">Apply</button>
-											</form>
-											<% end %>	
-										</th>
-									</tr>
-								</tbody>
-
-							</table>
-
-						</div>
-
-						<div class="tab-pane fade"  id="About">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
 	<br>
 	<br>
+	<%= yield %>
 
-	<div class="container">
-		<div class="col-md-10 col-md-offset-1">
-			<div class="well">
-
-				<div class="tab-content">
-					<div class="tab-pane fade in active"  id="Home">
-
-						<table class="table table-condensed">
-							<thead>
-								<tr>
-									<th>Job name</th>
-									<th>Description</th>
-									<th>Company</th>
-								</tr>
-							</thead>
-
-							<tbody>
-
-								<tr ng-repeat="appl in applications">
-									<th>{{appl[0]}}</th>
-									<th>{{appl[1]}}</th>
-									<th>{{appl[1]}}</th>
-								</tr>
-
-							</tbody>
-
-						</table>
-
-					</div>
-
-					<div class="tab-pane fade"  id="About">
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 	<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </body>
 </html>
-
